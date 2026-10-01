@@ -1,9 +1,12 @@
 #!/bin/bash
 
-dnf install -y wget fontconfig git java-21-openjdk java-21-openjdk-devel maven && \
+yum install -y wget fontconfig git java-21-amazon-corretto java-21-amazon-corretto-devel maven && \
+java --version && \
+git --version && \
+mvn -version && \
 wget -q -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/rpm-stable/jenkins.repo && \
 rpm --import https://pkg.jenkins.io/rpm-stable/jenkins.io-2026.key && \
-dnf install -y jenkins && \
+yum install -y jenkins && \
 JAVA_HOME_PATH=$(dirname $(dirname $(readlink -f $(which java)))) && \
 mkdir -p /etc/systemd/system/jenkins.service.d && \
 printf '[Service]\nEnvironment="JAVA_HOME=%s"\nEnvironment="JENKINS_JAVA_CMD=%s/bin/java"\n' "$JAVA_HOME_PATH" "$JAVA_HOME_PATH" > /etc/systemd/system/jenkins.service.d/java.conf && \
