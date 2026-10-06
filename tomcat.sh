@@ -1,3 +1,27 @@
+dnf install -y java-21-amazon-corretto wget
+
+wget https://dlcdn.apache.org/tomcat/tomcat-11/v11.0.26/bin/apache-tomcat-11.0.26.tar.gz
+
+tar -zxvf apache-tomcat-11.0.26.tar.gz
+
+sed -i '56a\<role rolename="manager-gui"/>' apache-tomcat-11.0.26/conf/tomcat-users.xml
+sed -i '57a\<role rolename="manager-script"/>' apache-tomcat-11.0.26/conf/tomcat-users.xml
+sed -i '58a\<user username="tomcat" password="root123456" roles="manager-gui,manager-script"/>' apache-tomcat-11.0.26/conf/tomcat-users.xml
+sed -i '59a\</tomcat-users>' apache-tomcat-11.0.26/conf/tomcat-users.xml
+sed -i '56d' apache-tomcat-11.0.26/conf/tomcat-users.xml
+
+sed -i '21d' apache-tomcat-11.0.26/webapps/manager/META-INF/context.xml
+sed -i '22d' apache-tomcat-11.0.26/webapps/manager/META-INF/context.xml
+
+sh apache-tomcat-11.0.26/bin/startup.sh
+
+
+
+
+
+
+
+
 dnf install java-21-amazon-corretto -y
 wget https://dlcdn.apache.org/tomcat/tomcat-11/v11.0.14/bin/apache-tomcat-11.0.14.tar.gz
 tar -zxvf apache-tomcat-11.0.14.tar.gz
